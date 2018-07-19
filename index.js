@@ -10,8 +10,13 @@ app.use(cors())
 const Router = require('koa-router')
 let user = require('./appApi/user.js')
 
+
+
+let goods = require('./appApi/goods.js')
 let router = new Router()
 router.use('/user',user.routes())
+
+router.use('/goods',goods.routes());
 
 app.use(router.routes())
 app.use(router.allowedMethods())
@@ -28,17 +33,17 @@ const {connect, initSchemas} = require('./database/init.js');
     connect()
     initSchemas()
     // console.log('aaaa')
-    const User = mongoose.model('User');
-    let oneUser = new User({userName: 'test02', password: '123456'});
-    oneUser.save().then(() => {
-        console.log('插入用户成功');
-    })
+    // const User = mongoose.model('User');
+    // let oneUser = new User({userName: 'test02', password: '123456'});
+    // oneUser.save().then(() => {
+    //     console.log('插入用户成功');
+    // })
 
-    let users = await User.findOne({}).exec()
+    // let users = await User.findOne({}).exec()
 
-    console.log('.....................')
-    console.log(users);
-    console.log('..............................')
+    // console.log('.....................')
+    // console.log(users);
+    // console.log('..............................')
 })()
 
 app.use(async ctx=> {
